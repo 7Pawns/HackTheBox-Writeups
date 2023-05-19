@@ -1,10 +1,14 @@
-# Neonify Challenge - Exploiting Ruby Regex
+# Neonify Challenge - Bypassing Ruby Regex
 
 We are faced with a site with a text box.
+
+![neonifymain](https://github.com/7Pawns/HackTheBox-Writeups/assets/124451776/e0f0ffb8-dbe2-468d-af2b-c23e9dd663e0)
 
 Whatever we type in the text box will show up below with a glow affect.
 
 We are also provided with the website's backend files, which are written in ruby.
+
+When we try to input a ruby script like ```<%= 7*7 %>``` we are provided with a ```malicious input``` output.
 
 Nothing interesting is found in GoBuster, and Nmap isn't used in challenges.
 
@@ -63,7 +67,11 @@ neon=abc
 First we test ```abc\n<%= 7*7 %>```,  so lets try and URL-Encode it.
 We get 49 so we achieved code execution. From here we just need to print out the flag.
 
+![neonifysample](https://github.com/7Pawns/HackTheBox-Writeups/assets/124451776/cb1fab97-8c48-4000-83ed-a714818481fd)
+
 From looking at the files we find the flag in the same directory so our payload will look like this   
 ```abc\n<%= File.read("flag.txt") %>```. Let's URL encode it and see if it works.
+
+![neonifyflag](https://github.com/7Pawns/HackTheBox-Writeups/assets/124451776/99d9deb6-b49b-443f-be08-0830a584c85c)
 
 And we got the flag.
