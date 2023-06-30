@@ -1,4 +1,5 @@
 # Busqueda Writeup
+![Busqueda](https://github.com/7Pawns/HackTheBox-Writeups/assets/124451776/7c14dfc3-7a18-4bc7-bcfb-f61ee2efceaf)
 ## Recon
 A simple search engine. Nothing too interesting in the site itself.
 
